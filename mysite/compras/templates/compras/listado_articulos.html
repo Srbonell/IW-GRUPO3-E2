@@ -3,24 +3,33 @@
 {% block title %}Catálogo de Artículos{% endblock %}
 
 {% block content %}
-    <h1>Catálogo de Artículos Industriales</h1>
-    <p>Consulta y gestiona los artículos disponibles para las órdenes de compra.</p>
+<h1>Catálogo de Artículos Industriales</h1>
+<p>Consulta y gestiona los artículos disponibles para las órdenes de compra.</p>
 
-    <table border="1" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-        <thead style="background-color: #f2f2f2;">
-            <tr>
-                <th>Código</th>
-                <th>Nombre</th>
-                <th>Categoría</th>
-                <th>Precio Est.</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td colspan="4" style="text-align: center; padding: 10px;">
-                    El catálogo está vacío.
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<table border="1" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+    <thead style="background-color: #f2f2f2;">
+        <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Precio Est.</th>
+            <th>Descripción</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for art in articulos %}
+        <tr>
+            <td>{{ art.codigo }}</td>
+            <td>{{ art.nombre }}</td>
+            <td>{{ art.categoria }}</td>
+            <td>{{ art.precio_estimado }} €</td>
+            <td>{{ art.descripcion|truncatewords:10 }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" style="text-align: center;">Aún no hay artículos. Ve al admin para crear uno.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
