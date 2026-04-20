@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Gestión de Compras{% endblock %}</title>
+    <style>
+        nav ul { background: #333; color: white; padding: 10px; list-style: none; }
+        nav ul li { display: inline; margin-right: 20px; }
+        nav ul li a { color: white; text-decoration: none; }
+        main { padding: 20px; }
+        footer { margin-top: 50px; border-top: 1px solid #ccc; font-size: 0.8em; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="{% url 'compras:inicio' %}">🏠 Inicio</a></li>
+            <li><a href="{% url 'compras:listado_ordenes' %}">📦 Órdenes de Compra</a></li>
+            <li><a href="{% url 'compras:listado_articulos' %}">📑 Catálogo de Artículos</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2026 - Proyecto IW Grupo 03</p>
+    </footer>
+
+</body>
+</html>

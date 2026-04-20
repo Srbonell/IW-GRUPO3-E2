@@ -1,0 +1,26 @@
+{% extends 'compras/base.html' %}
+
+{% block title %}Órdenes de Compra{% endblock %}
+
+{% block content %}
+    <h1>Gestión de Órdenes de Compra</h1>
+    <p>Aquí aparecerá el listado de todas las órdenes internas solicitadas.</p>
+    
+    <table border="1" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead style="background-color: #f2f2f2;">
+            <tr>
+                <th>Nº Orden</th>
+                <th>Fecha</th>
+                <th>Proveedor</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="4" style="text-align: center; padding: 10px;">
+                    No hay órdenes registradas todavía.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}
