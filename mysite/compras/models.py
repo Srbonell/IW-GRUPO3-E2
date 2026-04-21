@@ -1,8 +1,5 @@
 from django.db import models
 
-# Create your models here.
-from django.db import models
-
 # Entidad para gestionar los proveedores de la empresa 
 class Proveedor(models.Model):
     cif = models.CharField(max_length=9, unique=True) 
@@ -14,7 +11,7 @@ class Proveedor(models.Model):
     def __str__(self):
         return self.nombre_comercial
 
-# Entidad para el catálogo de artículos industriales 
+# Entidad para el catálogo de artículos industriales (Información Maestra)
 class Articulo(models.Model):
     codigo = models.CharField(max_length=20, unique=True) 
     nombre = models.CharField(max_length=150) 
@@ -25,9 +22,8 @@ class Articulo(models.Model):
     def __str__(self):
         return self.nombre
 
-# Entidad principal: Órdenes de compra internas
+# Entidad principal: Órdenes de compra (Cabecera)
 class OrdenCompra(models.Model):
-    # Definición de estados para la trazabilidad 
     ESTADOS = [
         ('pendiente', 'Pendiente'),
         ('aprobada', 'Aprobada'),
@@ -42,11 +38,19 @@ class OrdenCompra(models.Model):
     departamento_solicitante = models.CharField(max_length=100) 
     observaciones = models.TextField(blank=True, null=True) 
     
-    # Relación 1:N - Una orden pertenece a un proveedor 
+    # Relación 1:N - Una orden pertenece a un proveedor
     proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE) 
-    
-    # Relación N:N - Una orden puede tener varios artículos y viceversa
-    articulos = models.ManyToManyField(Articulo) 
 
     def __str__(self):
         return f"Orden {self.numero_orden}"
+
+# NUEVO MODELO: Línea de Detalle (Vínculo con datos históricos)
+#Esto nos va a ayudar a escalar el proyecto.
+class DetalleOrden(models.Model):
+    orden = models.ForeignKey(OrdenCompra, on_delete=models.CASCADE, related_name='detalles')
+    articulo = models.ForeignKey(Articulo, on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField(default=1)
+    precio_unitario_historico = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f"{self.articulo.nombre} en {self.orden.numero_orden}"
