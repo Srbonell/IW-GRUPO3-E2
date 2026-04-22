@@ -1,0 +1,42 @@
+{% extends 'compras/base.html' %}
+
+{% block title %}Detalle de Orden #{{ orden.numero_orden }}{% endblock %}
+
+{% block content %}
+    <h1>Orden de Compra: {{ orden.numero_orden }}</h1>
+    
+    <div style="background: #f9f9f9; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+        <p><strong>Proveedor:</strong> {{ orden.proveedor.nombre_comercial }}</p>
+        <p><strong>Fecha Solicitud:</strong> {{ orden.fecha_solicitud|date:"d/m/Y" }}</p>
+        <p><strong>Estado:</strong> {{ orden.get_estado_display }}</p>
+        <p><strong>Prioridad:</strong> {{ orden.prioridad }}</p>
+    </div>
+
+    <h3>Artículos en esta orden</h3>
+    <table border="1" style="width: 100%; border-collapse: collapse;">
+        <thead style="background-color: #eee;">
+            <tr>
+                <th>Artículo</th>
+                <th>Cantidad</th>
+                <th>Precio Unit. (Histórico)</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for detalle in orden.detalles.all %}
+            <tr>
+                <td>{{ detalle.articulo.nombre }}</td>
+                <td style="text-align: center;">{{ detalle.cantidad }}</td>
+                <td style="text-align: right;">{{ detalle.precio_unitario_historico }}€</td>
+                <td style="text-align: right;">
+                    {# Cálculo simple que Django puede hacer en el template #}
+                    <strong>{{ detalle.cantidad }}</strong> </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <p style="margin-top: 20px;">
+        <a href="{% url 'compras:listado_ordenes' %}">← Volver al listado</a>
+    </p>
+{% endblock %}
