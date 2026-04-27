@@ -3,31 +3,38 @@
 {% block title %}Catálogo de Artículos{% endblock %}
 
 {% block content %}
-<h1>Catálogo de Artículos Industriales</h1>
-<p>Consulta y gestiona los artículos disponibles para las órdenes de compra.</p>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px; margin-bottom: 10px;">
+    <div>
+        <h1 style="margin: 0;">Catálogo de Artículos Industriales</h1>
+        <p style="margin: 5px 0 0 0;">Consulta y gestiona los artículos disponibles.</p>
+    </div>
+    <a href="/admin/compras/articulo/add/" style="background-color: #28a745; color: white; padding: 12px 20px; border-radius: 6px; text-decoration: none; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        + Nuevo Artículo
+    </a>
+</div>
 
 <table border="1" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
     <thead style="background-color: #f2f2f2;">
         <tr>
-            <th>Código</th>
-            <th>Nombre</th>
-            <th>Categoría</th>
-            <th>Precio Est.</th>
-            <th>Descripción</th>
+            <th style="padding: 10px;">Código</th>
+            <th style="padding: 10px;">Nombre</th>
+            <th style="padding: 10px;">Categoría</th>
+            <th style="padding: 10px;">Precio Est.</th>
+            <th style="padding: 10px;">Descripción</th>
         </tr>
     </thead>
     <tbody>
         {% for art in articulos %}
         <tr>
-            <td>{{ art.codigo }}</td>
-            <td>{{ art.nombre }}</td>
-            <td>{{ art.categoria }}</td>
-            <td>{{ art.precio_estimado }} €</td>
-            <td>{{ art.descripcion|truncatewords:10 }}</td>
+            <td style="padding: 8px;">{{ art.codigo }}</td>
+            <td style="padding: 8px;">{{ art.nombre }}</td>
+            <td style="padding: 8px;">{{ art.categoria }}</td>
+            <td style="padding: 8px; text-align: right;">{{ art.precio_estimado }} €</td>
+            <td style="padding: 8px;">{{ art.descripcion|truncatewords:10 }}</td>
         </tr>
         {% empty %}
         <tr>
-            <td colspan="5" style="text-align: center;">Aún no hay artículos. Ve al admin para crear uno.</td>
+            <td colspan="5" style="text-align: center; padding: 20px;">Aún no hay artículos registrados en el sistema.</td>
         </tr>
         {% endfor %}
     </tbody>

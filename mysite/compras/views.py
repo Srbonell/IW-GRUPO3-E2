@@ -1,8 +1,26 @@
 from django.shortcuts import render,get_object_or_404
 from .models import Articulo, OrdenCompra
 
+from django.shortcuts import render
+from .models import Articulo, OrdenCompra, Proveedor
+
 def inicio(request):
-    return render(request, 'compras/index.html')
+    # Contamos los registros de cada tabla
+    total_articulos = Articulo.objects.count()
+    total_ordenes = OrdenCompra.objects.count()
+    total_proveedores = Proveedor.objects.count()
+    
+    # Buscamos las órdenes que están como "Pendiente" para el aviso
+    ordenes_pendientes = OrdenCompra.objects.filter(estado='pendiente').count()
+
+    context = {
+        'total_articulos': total_articulos,
+        'total_ordenes': total_ordenes,
+        'total_proveedores': total_proveedores,
+        'ordenes_pendientes': ordenes_pendientes,
+    }
+    
+    return render(request, 'compras/index.html', context)
 
 def listado_ordenes(request):
     

@@ -1,25 +1,49 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Gestión de Compras{% endblock %}</title>
     <style>
-        nav ul { background: #333; color: white; padding: 10px; list-style: none; }
-        nav ul li { display: inline; margin-right: 20px; }
-        nav ul li a { color: white; text-decoration: none; }
-        main { padding: 20px; }
-        footer { margin-top: 50px; border-top: 1px solid #ccc; font-size: 0.8em; }
+        nav ul {
+            background: #333;
+            color: white;
+            padding: 10px;
+            list-style: none;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        footer {
+            margin-top: 50px;
+            border-top: 1px solid #ccc;
+            font-size: 0.8em;
+        }
     </style>
 </head>
+
 <body>
 
-    <nav>
-        <ul>
-            <li><a href="{% url 'compras:inicio' %}">🏠 Inicio</a></li>
-            <li><a href="{% url 'compras:listado_ordenes' %}">📦 Órdenes de Compra</a></li>
-            <li><a href="{% url 'compras:listado_articulos' %}">📑 Catálogo de Artículos</a></li>
-        </ul>
+    <nav style="background: #333; padding: 15px; margin-bottom: 30px; border-radius: 5px;">
+        <a href="{% url 'compras:inicio' %}"
+            style="color: white; margin-right: 20px; text-decoration: none; font-weight: bold;">🏠 Inicio</a>
+        <a href="{% url 'compras:listado_articulos' %}"
+            style="color: white; margin-right: 20px; text-decoration: none;">📦 Artículos</a>
+        <a href="{% url 'compras:listado_ordenes' %}" style="color: white; text-decoration: none;">📝 Órdenes de
+            Compra</a>
     </nav>
 
     <main>
@@ -32,4 +56,5 @@
     </footer>
 
 </body>
+
 </html>

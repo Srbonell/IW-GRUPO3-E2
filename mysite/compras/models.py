@@ -43,6 +43,9 @@ class OrdenCompra(models.Model):
 
     def __str__(self):
         return f"Orden {self.numero_orden}"
+    # MÉTODO NUEVO: Suma todos los subtotales de la orden
+    def total_orden(self):
+        return sum(detalle.subtotal() for detalle in self.detalles.all())
 
 # NUEVO MODELO: Línea de Detalle (Vínculo con datos históricos)
 #Esto nos va a ayudar a escalar el proyecto.
@@ -54,3 +57,6 @@ class DetalleOrden(models.Model):
 
     def __str__(self):
         return f"{self.articulo.nombre} en {self.orden.numero_orden}"
+    # MÉTODO NUEVO: Calcula el subtotal de esta línea
+    def subtotal(self):
+        return self.cantidad * self.precio_unitario_historico

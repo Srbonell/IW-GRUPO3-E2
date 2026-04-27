@@ -1,17 +1,38 @@
 {% extends 'compras/base.html' %}
 
-{% block title %}Inicio - Gestión de Compras{% endblock %}
+{% block title %}Panel de Control - Gestión de Compras{% endblock %}
 
 {% block content %}
-    <h1>Bienvenido al Gestor de Compras Internas</h1>
-    <p>Desde este panel puedes gestionar las órdenes de compra, proveedores y el catálogo de artículos.</p>
+<div style="text-align: center; margin-bottom: 40px;">
+    <h1>Panel de Control de Suministros</h1>
+    <p>Resumen actual del sistema de aprovisionamiento</p>
+</div>
+
+<div style="display: flex; justify-content: space-around; gap: 20px; flex-wrap: wrap;">
     
-    <div style="background: #f4f4f4; padding: 15px; border-radius: 8px;">
-        <h3>Resumen del sistema:</h3>
-        <ul>
-            <li>Consulta el estado de las órdenes pendientes.</li>
-            <li>Gestiona el catálogo de artículos industriales.</li>
-            <li>Administra la relación con proveedores.</li>
-        </ul>
+    <div style="background: #e3f2fd; padding: 20px; border-radius: 10px; width: 200px; text-align: center; border: 1px solid #90caf9;">
+        <h3 style="margin: 0; color: #1976d2;">Artículos</h3>
+        <p style="font-size: 2rem; font-weight: bold; margin: 10px 0;">{{ total_articulos }}</p>
+        <a href="{% url 'compras:listado_articulos' %}" style="text-decoration: none; color: #1976d2; font-size: 0.9rem;">Ver catálogo →</a>
     </div>
+
+    <div style="background: #f1f8e9; padding: 20px; border-radius: 10px; width: 200px; text-align: center; border: 1px solid #a5d6a7;">
+        <h3 style="margin: 0; color: #388e3c;">Proveedores</h3>
+        <p style="font-size: 2rem; font-weight: bold; margin: 10px 0;">{{ total_proveedores }}</p>
+        <span style="color: #388e3c; font-size: 0.9rem;">Empresas activas</span>
+    </div>
+
+    <div style="background: #fff3e0; padding: 20px; border-radius: 10px; width: 200px; text-align: center; border: 1px solid #ffcc80;">
+        <h3 style="margin: 0; color: #f57c00;">Órdenes</h3>
+        <p style="font-size: 2rem; font-weight: bold; margin: 10px 0;">{{ total_ordenes }}</p>
+        <a href="{% url 'compras:listado_ordenes' %}" style="text-decoration: none; color: #f57c00; font-size: 0.9rem;">Ir al listado →</a>
+    </div>
+
+    <div style="background: #ffebee; padding: 20px; border-radius: 10px; width: 200px; text-align: center; border: 1px solid #ef9a9a;">
+        <h3 style="margin: 0; color: #d32f2f;">Pendientes</h3>
+        <p style="font-size: 2rem; font-weight: bold; margin: 10px 0;">{{ ordenes_pendientes }}</p>
+        <p style="color: #d32f2f; font-size: 0.9rem; margin: 0;">Requieren atención</p>
+    </div>
+
+</div>
 {% endblock %}
