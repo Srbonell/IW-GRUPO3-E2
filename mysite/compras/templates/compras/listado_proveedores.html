@@ -1,0 +1,61 @@
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        font-family: sans-serif;
+    }
+
+    th,
+    td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f4f4f4;
+        color: #333;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .btn-volver {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+</style>
+
+<h1>Listado de Proveedores</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nombre Comercial</th>
+            <th>CIF</th>
+            <th>Teléfono</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in proveedores %}
+        <tr>
+            <td>{{ p.nombre_comercial }}</td>  <!-- Antes tenías p.nombre -->
+            <td>{{ p.cif }}</td>               <!-- Antes tenías p.ruc_cif -->
+            <td>{{ p.telefono }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">No hay proveedores registrados.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'compras:inicio' %}" class="btn-volver">← Volver al inicio</a>

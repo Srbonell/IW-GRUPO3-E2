@@ -18,9 +18,13 @@ def inicio(request):
         'total_ordenes': total_ordenes,
         'total_proveedores': total_proveedores,
         'ordenes_pendientes': ordenes_pendientes,
-    }
+    }    
     
     return render(request, 'compras/index.html', context)
+
+def listado_proveedores(request):
+    todos_proveedores = Proveedor.objects.all()
+    return render(request, 'compras/listado_proveedores.html', {'proveedores': todos_proveedores})
 
 def listado_ordenes(request):
     
