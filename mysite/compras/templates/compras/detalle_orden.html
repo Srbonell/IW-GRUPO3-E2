@@ -1,28 +1,44 @@
 <h3>Artículos en esta orden</h3>
-    <table border="1" style="width: 100%; border-collapse: collapse;">
-        <thead style="background-color: #eee;">
-            <tr>
-                <th>Artículo</th>
-                <th>Cantidad</th>
-                <th>Precio Unit.</th>
-                <th>Subtotal</th> </tr>
-        </thead>
-        <tbody>
-            {% for detalle in orden.detalles.all %}
-            <tr>
-                <td>{{ detalle.articulo.nombre }}</td>
-                <td style="text-align: center;">{{ detalle.cantidad }}</td>
-                <td style="text-align: right;">{{ detalle.precio_unitario_historico }}€</td>
-                <td style="text-align: right; font-weight: bold;">
-                    {{ detalle.subtotal }}€ </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-        <tfoot>
-            <tr style="background-color: #f0f0f0;">
-                <td colspan="3" style="text-align: right; font-weight: bold; padding: 10px;">TOTAL ORDEN:</td>
-                <td style="text-align: right; font-weight: bold; color: #d32f2f; padding: 10px;">
-                    {{ orden.total_orden }}€ </td>
-            </tr>
-        </tfoot>
-    </table>
+
+<!-- Bloque de botones: Cerrar el div justo después de los enlaces -->
+<div style="margin-bottom: 20px;">
+    <a href="/admin/compras/detalleorden/add/" 
+       style="padding: 10px; background: #28a745; color: white; text-decoration: none; border-radius: 5px; display: inline-block;">
+       + Nueva Línea
+    </a>
+
+    <a href="/admin/compras/detalleorden/" 
+       style="padding: 10px; background: #6c757d; color: white; text-decoration: none; border-radius: 5px; margin-left: 10px; display: inline-block;">
+       ⚙️ Gestionar (Borrar/Editar)
+    </a>
+</div> <!-- AQUÍ estaba el error, hay que cerrar el div antes de la tabla -->
+
+<!-- Bloque de la tabla -->
+<table border="1" style="width: 100%; border-collapse: collapse; font-family: sans-serif;">
+    <thead style="background-color: #eee;">
+        <tr>
+            <th style="padding: 10px;">Artículo</th>
+            <th style="padding: 10px;">Cantidad</th>
+            <th style="padding: 10px;">Precio Unit.</th>
+            <th style="padding: 10px;">Subtotal</th> 
+        </tr>
+    </thead>
+    <tbody>
+        {% for detalle in orden.detalles.all %}
+        <tr>
+            <td style="padding: 10px;">{{ detalle.articulo.nombre }}</td>
+            <td style="padding: 10px; text-align: center;">{{ detalle.cantidad }}</td>
+            <td style="padding: 10px; text-align: right;">{{ detalle.precio_unitario_historico }}€</td>
+            <td style="padding: 10px; text-align: right; font-weight: bold;">{{ detalle.subtotal }}€</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr style="background-color: #f0f0f0;">
+            <td colspan="3" style="text-align: right; font-weight: bold; padding: 10px;">TOTAL ORDEN:</td>
+            <td style="text-align: right; font-weight: bold; color: #d32f2f; padding: 10px;">
+                {{ orden.total_orden }}€
+            </td>
+        </tr>
+    </tfoot>
+</table>

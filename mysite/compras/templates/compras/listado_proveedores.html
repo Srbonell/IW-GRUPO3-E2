@@ -1,3 +1,16 @@
+<div style="margin-bottom: 20px;">
+    <!-- Botón para Crear -->
+    <a href="/admin/compras/proveedor/add/" 
+       style="padding: 10px; background: #28a745; color: white; text-decoration: none; border-radius: 5px;">
+       + Nuevo Proveedor
+    </a>
+
+    <!-- Enlace al listado del Admin para Borrar/Editar -->
+    <a href="/admin/compras/proveedor/" 
+       style="padding: 10px; background: #6c757d; color: white; text-decoration: none; border-radius: 5px; margin-left: 10px;">
+       ⚙️ Gestionar (Borrar/Editar)
+    </a>
+</div>
 <style>
     table {
         width: 100%;
@@ -46,8 +59,8 @@
     <tbody>
         {% for p in proveedores %}
         <tr>
-            <td>{{ p.nombre_comercial }}</td>  <!-- Antes tenías p.nombre -->
-            <td>{{ p.cif }}</td>               <!-- Antes tenías p.ruc_cif -->
+            <td>{{ p.nombre_comercial }}</td>  
+            <td>{{ p.cif }}</td>               
             <td>{{ p.telefono }}</td>
         </tr>
         {% empty %}
