@@ -1,0 +1,43 @@
+{% extends 'compras/base.html' %}
+
+{% block title %}Añadir Artículo{% endblock %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 20px auto; font-family: sans-serif;">
+    <h2>Añadir Artículo a la Orden: {{ orden.numero_orden }}</h2>
+    <div style="margin-top: 20px; background: #eef2f7; padding: 15px; border-radius: 5px;">
+        <h4>Lista de precios actuales:</h4>
+        <ul style="font-size: 0.85em;">
+            {% for art in articulos_disponibles %}
+            <li>{{ art.nombre }}: <strong>{{ art.precio_estimado }}€</strong></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div style="background: #f8f9fa; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
+        <form method="post">
+            {% csrf_token %}
+
+            <!-- Renderizamos el formulario (incluye Artículo, Cantidad y Precio) -->
+            {{ form.as_p }}
+
+            <div style="margin-top: 20px;">
+                <button type="submit"
+                    style="background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
+                    + Añadir a la Orden
+                </button>
+
+                <!-- En form_detalle.html -->
+                <a href="{% url 'compras:detalle_orden' orden_id=orden.pk %}"
+                    style="margin-left: 15px; color: #666; text-decoration: none;">
+                    Cancelar y volver
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <p style="margin-top: 20px; color: #666; font-size: 0.9em;">
+        <strong>Nota:</strong> El artículo se añadirá con el precio histórico que indiques aquí.
+    </p>
+</div>
+{% endblock %}

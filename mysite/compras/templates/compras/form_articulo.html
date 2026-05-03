@@ -1,0 +1,14 @@
+<div style="max-width: 600px; margin: 20px auto; font-family: sans-serif;">
+    <h1>{% if editando %}Editar Artículo{% else %}Nuevo Artículo{% endif %}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div style="margin-top: 20px;">
+            <button type="submit" style="background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+                {% if editando %}Actualizar Artículo{% else %}Guardar Artículo{% endif %}
+            </button>
+            <a href="{% url 'compras:listado_articulos' %}" style="margin-left: 15px; color: #666; text-decoration: none;">Cancelar</a>
+        </div>
+    </form>
+</div>

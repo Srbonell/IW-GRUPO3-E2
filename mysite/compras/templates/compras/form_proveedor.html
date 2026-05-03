@@ -1,0 +1,10 @@
+<h1>{% if editando %}Editar Proveedor{% else %}Nuevo Proveedor{% endif %}</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" style="background: #28a745; color: white; padding: 10px; border: none; border-radius: 5px;">
+        {% if editando %}Guardar Cambios{% else %}Crear Proveedor{% endif %}
+    </button>
+    <a href="{% url 'compras:listado_proveedores' %}" style="margin-left: 10px;">Cancelar</a>
+</form>

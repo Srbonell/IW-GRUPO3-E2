@@ -1,16 +1,3 @@
-<div style="margin-bottom: 20px;">
-    <!-- Botón para Crear -->
-    <a href="/admin/compras/proveedor/add/" 
-       style="padding: 10px; background: #28a745; color: white; text-decoration: none; border-radius: 5px;">
-       + Nuevo Proveedor
-    </a>
-
-    <!-- Enlace al listado del Admin para Borrar/Editar -->
-    <a href="/admin/compras/proveedor/" 
-       style="padding: 10px; background: #6c757d; color: white; text-decoration: none; border-radius: 5px; margin-left: 10px;">
-       ⚙️ Gestionar (Borrar/Editar)
-    </a>
-</div>
 <style>
     table {
         width: 100%;
@@ -35,6 +22,25 @@
         background-color: #f9f9f9;
     }
 
+    .btn-nuevo {
+        display: inline-block;
+        padding: 10px;
+        background: #28a745;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .btn-borrar {
+        padding: 6px 10px;
+        background: #dc3545;
+        color: white;
+        text-decoration: none;
+        border-radius: 3px;
+        font-size: 0.85em;
+    }
+
     .btn-volver {
         display: inline-block;
         margin-top: 20px;
@@ -48,12 +54,22 @@
 
 <h1>Listado de Proveedores</h1>
 
+<div style="margin-bottom: 20px;">
+    <!-- El botón de Crear se queda arriba porque es general -->
+    <a href="{% url 'compras:crear_proveedor' %}" class="btn-nuevo">
+        + Nuevo Proveedor
+    </a>
+</div>
+
 <table>
     <thead>
         <tr>
             <th>Nombre Comercial</th>
             <th>CIF</th>
             <th>Teléfono</th>
+            <th>Dirección</th> <!-- Nueva -->
+            <th>Email</th>     <!-- Nueva -->
+            <th style="text-align: center;">Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -62,10 +78,22 @@
             <td>{{ p.nombre_comercial }}</td>  
             <td>{{ p.cif }}</td>               
             <td>{{ p.telefono }}</td>
+            <td>{{ p.direccion }}</td> <!-- Asegúrate de que se llame así en models.py -->
+            <td>{{ p.email }}</td>     <!-- Asegúrate de que se llame así en models.py -->
+            <td style="text-align: center;">
+                <a href="{% url 'compras:editar_proveedor' p.pk %}" 
+                   style="padding: 5px 8px; background: #007bff; color: white; text-decoration: none; border-radius: 3px; font-size: 0.8em;">
+                   ✏️ Editar
+                </a>
+                <a href="{% url 'compras:eliminar_proveedor' p.pk %}" 
+                   style="padding: 5px 8px; background: #dc3545; color: white; text-decoration: none; border-radius: 3px; font-size: 0.8em; margin-left: 5px;">
+                   🗑️ Borrar
+                </a>
+            </td>
         </tr>
         {% empty %}
         <tr>
-            <td colspan="3">No hay proveedores registrados.</td>
+            <td colspan="6" style="text-align: center;">No hay proveedores registrados.</td>
         </tr>
         {% endfor %}
     </tbody>
